@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hacker Access Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        body {
+            background: black;
+            color: #00ff00;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            overflow: hidden;
+        }
+        .matrix {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://media.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        .container {
+            margin-top: 100px;
+            animation: glitch 1s infinite;
+        }
+        input {
+            background: black;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            animation: blink 1s infinite alternate;
+        }
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        @keyframes glitch {
+            0% { transform: skew(-5deg); }
+            50% { transform: skew(5deg); }
+            100% { transform: skew(-5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix"></div>
+    <div class="container">
+        <h2 id="title">[ SYSTEM LOGIN ]</h2>
+        <form action="LoginServlet" method="post">
+            <p>Username: <input type="text" name="username" required></p>
+            <p>Password: <input type="password" name="password" required></p>
+            <input type="submit" value="Initiate Breach">
+        </form>
+        <p id="response"></p>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("error") === "1") {
+            document.getElementById("response").innerHTML = "ACCESS DENIED! SYSTEM LOCKDOWN INITIATED!";
+            document.getElementById("response").classList.add("error");
+        }
+    </script>
+</body>
+</html>
